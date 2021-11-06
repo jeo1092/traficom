@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block titulo %}
+    Simulación
+{% endblock titulo %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row border">
+            <div class="col border">
+              1 of 2
+            </div>
+            <div class="col border">
+              <div>
+                <table class="table">
+                  <thead>
+                      <tr>
+                          <th>ID Semáforo</th>
+                          <th>Estado</th>
+                          <th>URL Imagen</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for flujo in flujos %}
+                          <tr>
+                              <td>{{flujo.semaforo}}</td>
+                              <td>{{flujo.descripcion}}</td>
+                              <td>{{flujo.imagen_captada}}</td>
+                              <td>
+                                <button class="btn btn-primary" onclick="abrir_modal_editar('{% url 'trafico:' %}')"> Editar </button>
+                              </td>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+                </table>
+              </div>            
+            </div>
+        </div>
+    </div>
+{% endblock body%}
+{% block extrajs %}
+<script type="text/javascript">
+    var $ = jQuery.noConflict(); 
+    function abrir_modal_editar(url){
+        $('#edicion').load(url, function(){
+            $(this).modal('show');
+        })
+    }
+</script>
+{% endblock extrajs %}
