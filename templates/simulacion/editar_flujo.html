@@ -1,15 +1,30 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h2 class="modal-title">Edición de Libro {{ object.id }}</h2>
+            <h2 class="modal-title">Edición de Libro </h2>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form action="#" method="POST">
+        <form action="{% url 'trafico:actualizar_flujo' flujo.id%}" method="POST">
         {% csrf_token %}
             <div class="modal-body">
-                
+                <table class="table container-fluid">
+                    <thead>
+                        <tr>
+                            <th>ID Semáforo</th>
+                            <th>Estado</th>
+                            <th>URL Imagen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{flujo.semaforo}}</td>
+                            <td>{{flujo.descripcion}}</td>
+                            <td><input type="url" name="imagen_captada" length="400"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>

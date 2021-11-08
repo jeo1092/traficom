@@ -4,8 +4,11 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic.edit import FormView
+from django.views.generic import CreateView
 from django.contrib.auth import login, logout
-from .forms import FormularioLogin
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from .forms import FormularioLogin, FormularioRegistro
 
 class Login(FormView):
     template_name = 'login.html'
@@ -27,4 +30,11 @@ class Login(FormView):
 def logoutUsuario(request):
     logout(request)
     return HttpResponseRedirect(reverse_lazy('login'))
+
+class Register(CreateView):
+    model = User
+    template_name = 'register.html'
+    form_class = FormularioRegistro
+    success_url = reverse_lazy('login')
+    
 

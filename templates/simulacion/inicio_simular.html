@@ -23,10 +23,17 @@
                       {% for flujo in flujos %}
                           <tr>
                               <td>{{flujo.semaforo}}</td>
-                              <td>{{flujo.descripcion}}</td>
+                              <td>
+                                    <select name="{{flujo.id}}" id="{{flujo.id}}">
+                                        <option value="Nulo" {% ifequal flujo.descripcion 'Nulo' %} selected {% endifequal %}>Nulo</option>
+                                        <option value="Bajo" {% ifequal flujo.descripcion 'Bajo' %} selected {% endifequal %}>Bajo</option>
+                                        <option value="Medio" {% ifequal flujo.descripcion 'Medio' %} selected {% endifequal %}>Medio</option>
+                                        <option value="Alto" {% ifequal flujo.descripcion 'Alto' %} selected {% endifequal %}>Alto</option>
+                                    </select>
+                              </td>
                               <td>{{flujo.imagen_captada}}</td>
                               <td>
-                                <button class="btn btn-primary" onclick="abrir_modal_editar('{% url 'trafico:' %}')"> Editar </button>
+                                <button class="btn btn-primary" onclick="abrir_modal_editar('{% url 'trafico:editar_flujo' flujo.id 'desc' %}', {{flujo.id}})"> Editar </button>
                               </td>
                           </tr>
                       {% endfor %}
@@ -35,13 +42,28 @@
               </div>            
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col">
+                <div class="text-center">
+                    <a href="" class="btn btn-primary">Simular</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="edicion" role="dialog">
+        
     </div>
 {% endblock body%}
 {% block extrajs %}
 <script type="text/javascript">
     var $ = jQuery.noConflict(); 
-    function abrir_modal_editar(url){
-        $('#edicion').load(url, function(){
+    function abrir_modal_editar(url, flujo_id){
+        descripcion = document.getElementById(flujo_id).value;
+        url_mod = url.replace('desc',descripcion)
+        $('#edicion').load(url_mod, function(){
             $(this).modal('show');
         })
     }

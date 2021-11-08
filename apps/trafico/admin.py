@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from .models import FlujoVehicular, Semaforo, Simulacion
+from .models import EstadoSemaforo, FlujoVehicular, Semaforo, Simulacion
 
 class SemaforoResource(resources.ModelResource):
     class Meta:
@@ -24,3 +24,4 @@ class FlujoVehicularAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 admin.site.register(Semaforo, SemaforoAdmin)
 admin.site.register(FlujoVehicular, FlujoVehicularAdmin)
 admin.site.register(Simulacion)
+admin.site.register(EstadoSemaforo)

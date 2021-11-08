@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
 from apps.trafico.views import Inicio
-from apps.usuario.views import Login, logoutUsuario
+from apps.usuario.views import Login, logoutUsuario, Register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('trafico/', include(('apps.trafico.urls','trafico'))),
     path('', login_required(Inicio.as_view()), name='index'),
+    path('registro/', Register.as_view(), name='register'),
     path('accounts/login/', Login.as_view(), name='login'),
     path('logout/', login_required(logoutUsuario), name='logout'),
 ]
