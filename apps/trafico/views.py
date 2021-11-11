@@ -79,7 +79,19 @@ class ActualizarFlujo(UpdateView):
         return render(request, self.template_name, self.get_context_data())
 
 class Simular(ListView):
-    pass
+    template_name = 'simulacion/inicio_simular.html'
+
+    def get_queryset(self):
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
+
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    def obtener_estados(self):
+        pass
 
         
     
